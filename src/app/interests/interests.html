@@ -1,0 +1,15 @@
+<div class="interests-section">
+  <h2>Intereses</h2>
+  
+  <div *ngIf="interestsList.length > 0; else noData">
+    <ul class="interests-list">
+      <li *ngFor="let interest of interestsList" class="interest-tag">
+        {{ interest.interests }}
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noData>
+    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
+  </ng-template>
+</div>

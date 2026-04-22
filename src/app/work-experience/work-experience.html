@@ -1,0 +1,22 @@
+<div class="work-experience-section">
+  <h2>Experiencia Laboral</h2>
+  
+  <div *ngIf="workExperienceList.length > 0; else noData">
+    <div *ngFor="let job of workExperienceList" class="job-card">
+      <div class="job-header">
+        <div class="job-title-company">
+          <h3>{{ job.position }}</h3>
+          <p class="company">{{ job.company }}</p>
+        </div>
+        <p class="job-dates">{{ job.startDate }} - {{ job.endDate }}</p>
+      </div>
+      
+      <p class="job-location">📍 {{ job.location }}</p>
+      <p class="job-accomplishments">{{ job.accomplishments }}</p>
+    </div>
+  </div>
+  
+  <ng-template #noData>
+    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
+  </ng-template>
+</div>

@@ -1,0 +1,87 @@
+.names-section {
+  text-align: center;
+
+  .person-card {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+
+    .person-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      .person-photo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1.5rem;
+        border: 4px solid #007bff;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+      }
+
+      .person-info {
+        h1 {
+          margin: 0 0 0.75rem 0;
+          font-size: 2.2rem;
+          color: #1a1a1a;
+          font-weight: 700;
+          letter-spacing: -0.5px;
+        }
+
+        .goal-life {
+          margin: 0;
+          font-size: 1rem;
+          color: #666;
+          font-style: italic;
+          max-width: 600px;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    .contact-info {
+      text-align: center;
+      border-top: 2px solid #e8e8e8;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+
+      p {
+        margin: 0.6rem 0;
+        font-size: 0.95rem;
+        color: #666;
+
+        a {
+          color: #007bff;
+          text-decoration: none;
+          font-weight: 600;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #0056b3;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .names-section {
+    .person-card {
+      .person-header .person-photo {
+        width: 140px;
+        height: 140px;
+      }
+
+      .person-info h1 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}

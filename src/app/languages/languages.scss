@@ -1,0 +1,55 @@
+.languages-section {
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    border-bottom: 3px solid #ffc107;
+    padding-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  .language-item {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.2rem 0;
+
+    li {
+      padding: 1.2rem;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      border-left: 4px solid #ffc107;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateX(4px);
+        background-color: #fffbf0;
+      }
+
+      h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+        color: #1a1a1a;
+        font-weight: 600;
+      }
+
+      .language-level {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #666;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .languages-section {
+    .language-item li {
+      padding: 1rem;
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+  }
+}

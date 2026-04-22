@@ -1,0 +1,16 @@
+<div class="certificates-section">
+  <h2>Certificados</h2>
+  
+  <div *ngIf="certificatesList.length > 0; else noData">
+    <ul *ngFor="let cert of certificatesList" class="certificate-item">
+      <li>
+        <h3>{{ cert.name }}</h3>
+        <p><strong>{{ cert.organization }}</strong> - {{ cert.date }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noData>
+    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
+  </ng-template>
+</div>

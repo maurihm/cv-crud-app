@@ -1,0 +1,17 @@
+<div class="education-section">
+  <h2>Educación</h2>
+  
+  <div *ngIf="educationList.length > 0; else noData">
+    <ul *ngFor="let edu of educationList">
+      <li>
+        <h3>{{ edu.school }}</h3>
+        <p><strong>{{ edu.degree }}</strong></p>
+        <p>{{ edu.startDate }} - {{ edu.endDate }} | {{ edu.location }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noData>
+    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
+  </ng-template>
+</div>

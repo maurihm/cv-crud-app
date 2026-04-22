@@ -1,0 +1,56 @@
+.education-section {
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    border-bottom: 3px solid #28a745;
+    padding-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #28a745;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0.4rem 0;
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .education-section {
+    li {
+      padding: 1rem;
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+  }
+}

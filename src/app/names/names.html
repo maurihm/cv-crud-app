@@ -1,0 +1,18 @@
+<div class="names-section">
+  <div *ngFor="let person of namesList" class="person-card">
+    <div class="person-header">
+      <img *ngIf="person.photoUrl" [src]="person.photoUrl" alt="{{ person.name }}" class="person-photo">
+      <div class="person-info">
+        <h1>{{ person.name }}</h1>
+        <p class="goal-life">{{ person.goalLife }}</p>
+      </div>
+    </div>
+    
+    <div class="contact-info">
+      <p *ngIf="person.email"><strong>Email:</strong> <a [href]="'mailto:' + person.email">{{ person.email }}</a></p>
+      <p *ngIf="person.phoneNumber"><strong>Teléfono:</strong> {{ person.phoneNumber }}</p>
+      <p *ngIf="person.location"><strong>Ubicación:</strong> {{ person.location }}</p>
+      <p *ngIf="person.socialNetwork"><strong>Red Social:</strong> <a [href]="person.socialNetwork" target="_blank">Perfil</a></p>
+    </div>
+  </div>
+</div>

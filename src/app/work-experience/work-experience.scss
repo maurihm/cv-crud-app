@@ -1,0 +1,86 @@
+.work-experience-section {
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  .job-card {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+
+      .job-title-company {
+        flex: 1;
+
+        h3 {
+          margin: 0 0 0.4rem 0;
+          font-size: 1.2rem;
+          color: #1a1a1a;
+          font-weight: 600;
+        }
+
+        .company {
+          margin: 0;
+          font-size: 1rem;
+          color: #007bff;
+          font-weight: 600;
+        }
+      }
+
+      .job-dates {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #999;
+        text-align: right;
+        white-space: nowrap;
+      }
+    }
+
+    .job-location {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .job-accomplishments {
+      margin: 1rem 0 0 0;
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.7;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .work-experience-section {
+    .job-card {
+      .job-header {
+        flex-direction: column;
+
+        .job-dates {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

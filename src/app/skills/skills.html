@@ -1,0 +1,16 @@
+<div class="skills-section">
+  <h2>Skills</h2>
+  
+  <div *ngIf="skillsList.length > 0; else noData">
+    <ul *ngFor="let skill of skillsList">
+      <li>
+        <h3>{{ skill.name }}</h3>
+        <p><strong>{{ skill.category }}</strong> - {{ skill.level }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noData>
+    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
+  </ng-template>
+</div>
