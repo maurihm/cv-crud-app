@@ -42,3 +42,22 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Sensitive files and secrets
+.env
+.env.*
+!.env.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Cloud/Firebase service account credentials
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*credentials*.json
+*secret*.json
