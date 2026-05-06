@@ -8,28 +8,48 @@
     font-weight: 700;
   }
 
-  .interests-list {
-    list-style: none;
-    padding: 0;
+  .interest-list {
+    list-style: disc;
+    padding-left: 1.25rem;
     margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
 
-    .interest-tag {
-      display: inline-block;
-      padding: 0.7rem 1.4rem;
-      background: linear-gradient(135deg, #e83e8c, #c71f7f);
-      color: white;
-      border-radius: 25px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(232, 62, 140, 0.3);
-      transition: all 0.3s ease;
+    .interest-item {
+      margin-bottom: 0.85rem;
+      padding-left: 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
 
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(232, 62, 140, 0.4);
+      span {
+        font-size: 0.98rem;
+        font-weight: 500;
+        color: #1a1a1a;
+      }
+
+      .tag-actions {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .btn-tag-edit,
+      .btn-tag-delete {
+        width: 1.8rem;
+        height: 1.8rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 0.82rem;
+      }
+
+      .btn-tag-edit {
+        background: #eef2ff;
+        color: #3b5ccc;
+      }
+
+      .btn-tag-delete {
+        background: #ffe9ea;
+        color: #d64545;
       }
     }
   }

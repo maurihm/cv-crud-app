@@ -78,13 +78,17 @@
       Cargando...
     </div>
 
-    <div *ngIf="skillsList.length > 0; else noData" class="skills-grid">
-      <div *ngFor="let item of skillsList" class="skill-card">
-        <div class="skill-badge" [ngClass]="'level-' + (item.level || '').toLowerCase()">
-          {{ item.level }}
+    <ul *ngIf="skillsList.length > 0; else noData" class="skills-list">
+      <li *ngFor="let item of skillsList" class="skill-item">
+        <div class="skill-main">
+          <div class="skill-badge" [ngClass]="'level-' + (item.level || '').toLowerCase()">
+            {{ item.level }}
+          </div>
+          <div>
+            <h3>{{ item.name }}</h3>
+            <p class="category" *ngIf="item.category">{{ item.category }}</p>
+          </div>
         </div>
-        <h3>{{ item.name }}</h3>
-        <p class="category" *ngIf="item.category">{{ item.category }}</p>
         <div class="skill-actions">
           <button class="btn-icon edit" (click)="openForm(item)" title="Editar" *ngIf="!readOnly">
             ✎
@@ -93,8 +97,8 @@
             ✕
           </button>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
 
     <ng-template #noData>
       <p class="no-data">Sin habilidades agregadas. ¡Añade tu primera habilidad!</p>

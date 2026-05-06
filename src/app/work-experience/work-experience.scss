@@ -8,65 +8,68 @@
     font-weight: 700;
   }
 
-  .job-card {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background-color: #f8f9fa;
-    border-radius: 6px;
-    border-left: 4px solid #007bff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .items-list-ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin: 0;
 
-    &:hover {
-      transform: translateX(4px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .job-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+    .job-card {
       margin-bottom: 1rem;
-      gap: 1rem;
+      padding-left: 0.35rem;
 
-      .job-title-company {
-        flex: 1;
+      .job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        gap: 1rem;
 
-        h3 {
-          margin: 0 0 0.4rem 0;
-          font-size: 1.2rem;
-          color: #1a1a1a;
-          font-weight: 600;
+        .job-title-company {
+          flex: 1;
+
+          h3 {
+            margin: 0 0 0.4rem 0;
+            font-size: 1.15rem;
+            color: #1a1a1a;
+            font-weight: 600;
+          }
+
+          .company {
+            margin: 0;
+            font-size: 1rem;
+            color: #007bff;
+            font-weight: 600;
+          }
         }
 
-        .company {
+        .job-dates {
           margin: 0;
-          font-size: 1rem;
-          color: #007bff;
-          font-weight: 600;
+          font-size: 0.9rem;
+          color: #999;
+          text-align: right;
+          white-space: nowrap;
         }
       }
 
-      .job-dates {
-        margin: 0;
+      .job-location {
+        margin: 0.5rem 0;
         font-size: 0.9rem;
-        color: #999;
-        text-align: right;
-        white-space: nowrap;
+        color: #666;
+        font-weight: 500;
       }
-    }
 
-    .job-location {
-      margin: 0.5rem 0;
-      font-size: 0.9rem;
-      color: #666;
-      font-weight: 500;
-    }
+      .job-accomplishments {
+        margin: 0.9rem 0 0 0;
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.7;
+      }
 
-    .job-accomplishments {
-      margin: 1rem 0 0 0;
-      font-size: 0.95rem;
-      color: #666;
-      line-height: 1.7;
+      .item-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
     }
   }
 }

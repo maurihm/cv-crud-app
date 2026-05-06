@@ -78,8 +78,8 @@
       Cargando...
     </div>
 
-    <div *ngIf="certificatesList.length > 0; else noData" class="items-container">
-      <div *ngFor="let cert of certificatesList" class="item-card">
+    <ul *ngIf="certificatesList.length > 0; else noData" class="certificate-list">
+      <li *ngFor="let cert of certificatesList" class="item-card">
         <div class="item-content">
           <h3>{{ cert.name }}</h3>
           <p class="organization"><strong>{{ cert.organization }}</strong></p>
@@ -93,8 +93,8 @@
             ✕
           </button>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
 
     <ng-template #noData>
       <p class="no-data">Sin certificados agregados. ¡Añade tu primer certificado!</p>

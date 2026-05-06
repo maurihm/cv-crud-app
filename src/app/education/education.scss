@@ -223,69 +223,51 @@
       color: #999;
     }
 
-    .items-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.5rem;
+    .items-list-ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin: 0;
 
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-      }
-    }
+      .item-card {
+        margin-bottom: 1rem;
+        padding-left: 0.35rem;
 
-    .item-card {
-      background: #f9f9f9;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-
-      &:hover {
-        border-color: #667eea;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-        transform: translateY(-2px);
-      }
-
-      .item-content {
-        flex: 1;
-
-        h3 {
-          margin: 0 0 0.5rem 0;
-          font-size: 1.1rem;
-          color: #1a1a1a;
-          font-weight: 600;
-        }
-
-        p {
-          margin: 0.4rem 0;
-          color: #666;
-          font-size: 0.95rem;
-
-          &.degree {
-            color: #667eea;
-            font-weight: 500;
+        .item-content {
+          h3 {
+            margin: 0 0 0.35rem 0;
+            font-size: 1.05rem;
+            color: #1a1a1a;
+            font-weight: 600;
           }
 
-          &.dates {
-            color: #999;
-            font-size: 0.9rem;
-          }
+          p {
+            margin: 0.25rem 0;
+            color: #666;
+            font-size: 0.95rem;
 
-          &.description {
-            margin-top: 0.75rem;
-            color: #777;
-            line-height: 1.5;
+            &.degree {
+              color: #667eea;
+              font-weight: 500;
+            }
+
+            &.dates {
+              color: #999;
+              font-size: 0.9rem;
+            }
+
+            &.description {
+              margin-top: 0.5rem;
+              color: #777;
+              line-height: 1.5;
+            }
           }
         }
-      }
 
-      .item-actions {
-        display: flex;
-        gap: 0.5rem;
+        .item-actions {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: 0.5rem;
+        }
       }
     }
 

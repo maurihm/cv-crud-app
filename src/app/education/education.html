@@ -120,8 +120,8 @@
       Cargando...
     </div>
 
-    <div *ngIf="educationList.length > 0; else noData" class="items-container">
-      <div *ngFor="let item of educationList" class="item-card">
+    <ul *ngIf="educationList.length > 0; else noData" class="items-list-ul">
+      <li *ngFor="let item of educationList" class="item-card">
         <div class="item-content">
           <h3>{{ item.school }}</h3>
           <p class="degree"><strong>{{ item.degree }}</strong> en {{ item.fieldOfStudy }}</p>
@@ -136,8 +136,8 @@
             ✕
           </button>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
 
     <ng-template #noData>
       <p class="no-data">Sin educación agregada. ¡Añade tu primera entrada!</p>

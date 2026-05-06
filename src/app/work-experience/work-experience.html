@@ -120,8 +120,8 @@
       Cargando...
     </div>
 
-    <div *ngIf="workExperienceList.length > 0; else noData" class="items-container">
-      <div *ngFor="let job of workExperienceList" class="item-card job-card">
+    <ul *ngIf="workExperienceList.length > 0; else noData" class="items-list-ul">
+      <li *ngFor="let job of workExperienceList" class="item-card job-card">
         <div class="item-content">
           <h3>{{ job.position }}</h3>
           <p class="company"><strong>{{ job.company }}</strong></p>
@@ -137,8 +137,8 @@
             ✕
           </button>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
 
     <ng-template #noData>
       <p class="no-data">Sin experiencia laboral agregada. ¡Añade tu primera experiencia!</p>

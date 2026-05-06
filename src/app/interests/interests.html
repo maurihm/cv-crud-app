@@ -49,15 +49,15 @@
       Cargando...
     </div>
 
-    <div *ngIf="interestsList.length > 0; else noData" class="interests-container">
-      <div *ngFor="let interest of interestsList" class="interest-tag">
+    <ul *ngIf="interestsList.length > 0; else noData" class="interest-list">
+      <li *ngFor="let interest of interestsList" class="interest-item">
         <span>{{ interest.interests }}</span>
-          <div class="tag-actions" *ngIf="!readOnly">
-            <button class="btn-tag-edit" (click)="openForm(interest)" title="Editar">✎</button>
-            <button class="btn-tag-delete" (click)="deleteInterest(interest.id!)" title="Eliminar">✕</button>
-          </div>
-      </div>
-    </div>
+        <div class="tag-actions" *ngIf="!readOnly">
+          <button class="btn-tag-edit" (click)="openForm(interest)" title="Editar">✎</button>
+          <button class="btn-tag-delete" (click)="deleteInterest(interest.id!)" title="Eliminar">✕</button>
+        </div>
+      </li>
+    </ul>
 
     <ng-template #noData>
       <p class="no-data">Sin intereses agregados. ¡Añade tu primer interés!</p>
