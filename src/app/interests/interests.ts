@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InterestsService } from '../services/interests-service/interests.service';
 import { Interest } from '../models/interests/interests.model';
@@ -10,6 +10,7 @@ import { Interest } from '../models/interests/interests.model';
   standalone: false
 })
 export class InterestsComponent implements OnInit {
+  @Input() readOnly = false;
   interestsList: Interest[] = [];
   interestsForm!: FormGroup;
   showForm = false;

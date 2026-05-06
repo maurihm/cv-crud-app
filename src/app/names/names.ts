@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NamesService } from '../services/names-service/names.service';
 import { Name } from '../models/names/names.model';
@@ -10,6 +10,7 @@ import { Name } from '../models/names/names.model';
   standalone: false
 })
 export class NamesComponent implements OnInit {
+  @Input() readOnly = false;
   namesList: Name[] = [];
   namesForm!: FormGroup;
   showForm = false;

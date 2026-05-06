@@ -14,35 +14,45 @@
       <a href="#section-languages">Idiomas</a>
       <a href="#section-interests">Intereses</a>
     </nav>
+
+    <div class="edit-actions">
+      <button class="btn" (click)="namesComp.openForm()">Editar Header</button>
+      <button class="btn" (click)="workComp.openForm()">Editar Experiencia</button>
+      <button class="btn" (click)="skillsComp.openForm()">Editar Habilidades</button>
+      <button class="btn" (click)="eduComp.openForm()">Editar Educación</button>
+      <button class="btn" (click)="certComp.openForm()">Editar Certificados</button>
+      <button class="btn" (click)="langsComp.openForm()">Editar Idiomas</button>
+      <button class="btn" (click)="interestsComp.openForm()">Editar Intereses</button>
+    </div>
   </header>
 
   <div class="cv-container">
     <div class="cv-section header-section" id="section-header">
-      <app-names></app-names>
+      <app-names #namesComp [readOnly]="false"></app-names>
     </div>
 
     <div class="cv-section" id="section-work">
-      <app-work-experience></app-work-experience>
+      <app-work-experience #workComp [readOnly]="false"></app-work-experience>
     </div>
 
     <div class="cv-section" id="section-skills">
-      <app-skills></app-skills>
+      <app-skills #skillsComp [readOnly]="false"></app-skills>
     </div>
 
     <div class="cv-section" id="section-education">
-      <app-education></app-education>
+      <app-education #eduComp [readOnly]="false"></app-education>
     </div>
 
     <div class="cv-section" id="section-certificates">
-      <app-certificates></app-certificates>
+      <app-certificates #certComp [readOnly]="false"></app-certificates>
     </div>
 
     <div class="cv-section" id="section-languages">
-      <app-languages></app-languages>
+      <app-languages #langsComp [readOnly]="false"></app-languages>
     </div>
 
     <div class="cv-section" id="section-interests">
-      <app-interests></app-interests>
+      <app-interests #interestsComp [readOnly]="false"></app-interests>
     </div>
   </div>
 </div>

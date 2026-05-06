@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillsService } from '../services/skills-service/skills.service';
 import { Skill } from '../models/skills/skills.model';
@@ -10,6 +10,7 @@ import { Skill } from '../models/skills/skills.model';
   styleUrls: ['./skills.scss']
 })
 export class SkillsComponent implements OnInit {
+  @Input() readOnly = false;
   skillsList: Skill[] = [];
   skillsForm!: FormGroup;
   showForm = false;

@@ -1,7 +1,7 @@
 <div class="education-section">
   <div class="section-header">
     <h2>Educación</h2>
-    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+    <button class="btn-add" (click)="openForm()" *ngIf="!readOnly && !showForm">
       <span class="icon">+</span> Agregar
     </button>
   </div>
@@ -129,10 +129,10 @@
           <p class="description" *ngIf="item.description">{{ item.description }}</p>
         </div>
         <div class="item-actions">
-          <button class="btn-icon edit" (click)="openForm(item)" title="Editar">
+          <button class="btn-icon edit" (click)="openForm(item)" title="Editar" *ngIf="!readOnly">
             ✎
           </button>
-          <button class="btn-icon delete" (click)="deleteEducation(item.id!)" title="Eliminar">
+          <button class="btn-icon delete" (click)="deleteEducation(item.id!)" title="Eliminar" *ngIf="!readOnly">
             ✕
           </button>
         </div>

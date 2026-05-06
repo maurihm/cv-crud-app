@@ -1,7 +1,7 @@
 <div class="languages-section">
   <div class="section-header">
     <h2>Idiomas</h2>
-    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+    <button class="btn-add" (click)="openForm()" *ngIf="!readOnly && !showForm">
       <span class="icon">+</span> Agregar
     </button>
   </div>
@@ -76,10 +76,10 @@
           <p class="level"><strong>{{ lang.level }}</strong></p>
         </div>
         <div class="item-actions">
-          <button class="btn-icon edit" (click)="openForm(lang)" title="Editar">
+          <button class="btn-icon edit" (click)="openForm(lang)" title="Editar" *ngIf="!readOnly">
             ✎
           </button>
-          <button class="btn-icon delete" (click)="deleteLanguage(lang.id!)" title="Eliminar">
+          <button class="btn-icon delete" (click)="deleteLanguage(lang.id!)" title="Eliminar" *ngIf="!readOnly">
             ✕
           </button>
         </div>

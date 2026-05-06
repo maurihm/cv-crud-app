@@ -1,7 +1,7 @@
 <div class="work-experience-section">
   <div class="section-header">
     <h2>Experiencia Laboral</h2>
-    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+    <button class="btn-add" (click)="openForm()" *ngIf="!readOnly && !showForm">
       <span class="icon">+</span> Agregar
     </button>
   </div>
@@ -130,10 +130,10 @@
           <p class="accomplishments" *ngIf="job.accomplishments">{{ job.accomplishments }}</p>
         </div>
         <div class="item-actions">
-          <button class="btn-icon edit" (click)="openForm(job)" title="Editar">
+          <button class="btn-icon edit" (click)="openForm(job)" title="Editar" *ngIf="!readOnly">
             ✎
           </button>
-          <button class="btn-icon delete" (click)="deleteWorkExperience(job.id!)" title="Eliminar">
+          <button class="btn-icon delete" (click)="deleteWorkExperience(job.id!)" title="Eliminar" *ngIf="!readOnly">
             ✕
           </button>
         </div>

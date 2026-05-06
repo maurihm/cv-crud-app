@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LanguagesService } from '../services/languages-service/languages.service';
 import { Language } from '../models/languages/languages.model';
@@ -10,6 +10,7 @@ import { Language } from '../models/languages/languages.model';
   standalone: false
 })
 export class LanguagesComponent implements OnInit {
+  @Input() readOnly = false;
   languagesList: Language[] = [];
   languagesForm!: FormGroup;
   showForm = false;

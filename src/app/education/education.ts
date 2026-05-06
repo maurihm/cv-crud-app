@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EducationService } from '../services/header-service/education.service';
 import { Education } from '../models/education/education.model';
@@ -10,6 +10,7 @@ import { Education } from '../models/education/education.model';
   styleUrls: ['./education.scss']
 })
 export class EducationComponent implements OnInit {
+  @Input() readOnly = false;
   educationList: Education[] = [];
   educationForm!: FormGroup;
   showForm = false;

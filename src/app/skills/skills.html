@@ -1,7 +1,7 @@
 <div class="skills-section">
   <div class="section-header">
     <h2>Habilidades</h2>
-    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+    <button class="btn-add" (click)="openForm()" *ngIf="!readOnly && !showForm">
       <span class="icon">+</span> Agregar
     </button>
   </div>
@@ -86,10 +86,10 @@
         <h3>{{ item.name }}</h3>
         <p class="category" *ngIf="item.category">{{ item.category }}</p>
         <div class="skill-actions">
-          <button class="btn-icon edit" (click)="openForm(item)" title="Editar">
+          <button class="btn-icon edit" (click)="openForm(item)" title="Editar" *ngIf="!readOnly">
             ✎
           </button>
-          <button class="btn-icon delete" (click)="deleteSkill(item.id!)" title="Eliminar">
+          <button class="btn-icon delete" (click)="deleteSkill(item.id!)" title="Eliminar" *ngIf="!readOnly">
             ✕
           </button>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CertificatesService } from '../services/certificates-service/certificates.service';
 import { Certificate } from '../models/certificates/certificates.model';
@@ -10,6 +10,7 @@ import { Certificate } from '../models/certificates/certificates.model';
   standalone: false
 })
 export class CertificatesComponent implements OnInit {
+  @Input() readOnly = false;
   certificatesList: Certificate[] = [];
   certificatesForm!: FormGroup;
   showForm = false;
