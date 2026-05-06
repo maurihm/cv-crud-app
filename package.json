@@ -9,6 +9,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh-cv": "ng build --configuration production --base-href /cv/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:cv-musk-style": "node dist/cv-musk-style/server/server.mjs"

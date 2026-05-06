@@ -1,50 +1,48 @@
-<div class="cv-container">
-  
-  <!-- Header / Información Personal (Full Width) -->
-  <div class="cv-section header-section">
-    <app-names></app-names>
-  </div>
+<div class="editor-page">
+  <header class="edit-nav" aria-label="Navegación de edición">
+    <div class="edit-nav-title">
+      <h1>Editar CV</h1>
+      <p>Selecciona una sección para ir directo a su editor</p>
+    </div>
 
-  <!-- COLUMN LEFT -->
-  
-  <!-- Experiencia Laboral -->
-  <div class="cv-section">
-    <app-work-experience></app-work-experience>
-  </div>
+    <nav class="edit-nav-links">
+      <a href="#section-header">Header</a>
+      <a href="#section-work">Experiencia</a>
+      <a href="#section-skills">Habilidades</a>
+      <a href="#section-education">Educación</a>
+      <a href="#section-certificates">Certificados</a>
+      <a href="#section-languages">Idiomas</a>
+      <a href="#section-interests">Intereses</a>
+    </nav>
+  </header>
 
-  <!-- COLUMN RIGHT -->
-  
-  <!-- Habilidades -->
-  <div class="cv-section">
-    <app-skills></app-skills>
-  </div>
+  <div class="cv-container">
+    <div class="cv-section header-section" id="section-header">
+      <app-names></app-names>
+    </div>
 
-  <!-- COLUMN LEFT -->
-  
-  <!-- Educación -->
-  <div class="cv-section">
-    <app-education></app-education>
-  </div>
+    <div class="cv-section" id="section-work">
+      <app-work-experience></app-work-experience>
+    </div>
 
-  <!-- COLUMN RIGHT -->
-  
-  <!-- Certificados -->
-  <div class="cv-section">
-    <app-certificates></app-certificates>
-  </div>
+    <div class="cv-section" id="section-skills">
+      <app-skills></app-skills>
+    </div>
 
-  <!-- COLUMN LEFT -->
-  
-  <!-- Idiomas -->
-  <div class="cv-section">
-    <app-languages></app-languages>
-  </div>
+    <div class="cv-section" id="section-education">
+      <app-education></app-education>
+    </div>
 
-  <!-- COLUMN RIGHT -->
-  
-  <!-- Intereses -->
-  <div class="cv-section">
-    <app-interests></app-interests>
-  </div>
+    <div class="cv-section" id="section-certificates">
+      <app-certificates></app-certificates>
+    </div>
 
+    <div class="cv-section" id="section-languages">
+      <app-languages></app-languages>
+    </div>
+
+    <div class="cv-section" id="section-interests">
+      <app-interests></app-interests>
+    </div>
+  </div>
 </div>

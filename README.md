@@ -57,3 +57,31 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Deploy del CV a subruta de GitHub Pages (/cv)
+
+Este proyecto puede publicar el CV en la subruta `/cv` del repositorio `maurihm.github.io` sin mezclar ambos proyectos.
+
+### Flujo recomendado
+
+1. Mantener este repo como dashboard/editor (`cv-musk-style-crud`).
+2. Mantener el repo `maurihm.github.io` solo como sitio público.
+3. Al hacer push a `main` en este repo, un workflow compila Angular y sincroniza `dist/cv-musk-style/browser` hacia `maurihm.github.io/cv`.
+
+### Requisito de autenticación
+
+Crear en este repositorio el secreto:
+
+- `GH_PAGES_TOKEN`: Personal Access Token con permisos de escritura sobre `maurihm/maurihm.github.io`.
+
+### Archivo del workflow
+
+- `.github/workflows/deploy-cv-subruta.yml`
+
+### Build local para subruta
+
+```bash
+npm run build:gh-cv
+```
+
+Este comando usa `--base-href /cv/` para que los assets funcionen correctamente en `https://maurihm.github.io/cv/`.
