@@ -1,22 +1,147 @@
 <div class="work-experience-section">
-  <h2>Experiencia Laboral</h2>
-  
-  <div *ngIf="workExperienceList.length > 0; else noData">
-    <div *ngFor="let job of workExperienceList" class="job-card">
-      <div class="job-header">
-        <div class="job-title-company">
-          <h3>{{ job.position }}</h3>
-          <p class="company">{{ job.company }}</p>
-        </div>
-        <p class="job-dates">{{ job.startDate }} - {{ job.endDate }}</p>
-      </div>
-      
-      <p class="job-location">📍 {{ job.location }}</p>
-      <p class="job-accomplishments">{{ job.accomplishments }}</p>
-    </div>
+  <div class="section-header">
+    <h2>Experiencia Laboral</h2>
+    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+      <span class="icon">+</span> Agregar
+    </button>
   </div>
-  
-  <ng-template #noData>
-    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
-  </ng-template>
+
+  <!-- Formulario CRUD -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-overlay" (click)="closeForm()"></div>
+    <form [formGroup]="workExperienceForm" (ngSubmit)="onSubmit()" class="form-modal">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar' : 'Agregar' }} Experiencia Laboral</h3>
+        <button type="button" class="btn-close" (click)="closeForm()">✕</button>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="company">Empresa</label>
+          <input
+            type="text"
+            id="company"
+            formControlName="company"
+            placeholder="Nombre de la empresa"
+            class="form-input"
+            [class.is-invalid]="submitted && f['company'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['company'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="position">Posición</label>
+          <input
+            type="text"
+            id="position"
+            formControlName="position"
+            placeholder="Ej: Desarrollador Senior"
+            class="form-input"
+            [class.is-invalid]="submitted && f['position'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['position'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startDate">Fecha de Inicio</label>
+            <input
+              type="date"
+              id="startDate"
+              formControlName="startDate"
+              class="form-input"
+              [class.is-invalid]="submitted && f['startDate'].errors"
+            />
+            <small class="error" *ngIf="submitted && f['startDate'].errors">
+              Campo requerido
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="endDate">Fecha de Finalización</label>
+            <input
+              type="date"
+              id="endDate"
+              formControlName="endDate"
+              class="form-input"
+              [class.is-invalid]="submitted && f['endDate'].errors"
+            />
+            <small class="error" *ngIf="submitted && f['endDate'].errors">
+              Campo requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Ubicación</label>
+          <input
+            type="text"
+            id="location"
+            formControlName="location"
+            placeholder="Ciudad, País"
+            class="form-input"
+            [class.is-invalid]="submitted && f['location'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['location'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="accomplishments">Logros (Opcional)</label>
+          <textarea
+            id="accomplishments"
+            formControlName="accomplishments"
+            placeholder="Describe tus principales logros"
+            class="form-input"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : editingId ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de Experiencia Laboral -->
+  <div class="items-list" *ngIf="!showForm">
+    <div *ngIf="loading && workExperienceList.length === 0" class="loading">
+      Cargando...
+    </div>
+
+    <div *ngIf="workExperienceList.length > 0; else noData" class="items-container">
+      <div *ngFor="let job of workExperienceList" class="item-card job-card">
+        <div class="item-content">
+          <h3>{{ job.position }}</h3>
+          <p class="company"><strong>{{ job.company }}</strong></p>
+          <p class="dates">{{ job.startDate }} - {{ job.endDate }}</p>
+          <p class="location">📍 {{ job.location }}</p>
+          <p class="accomplishments" *ngIf="job.accomplishments">{{ job.accomplishments }}</p>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon edit" (click)="openForm(job)" title="Editar">
+            ✎
+          </button>
+          <button class="btn-icon delete" (click)="deleteWorkExperience(job.id!)" title="Eliminar">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data">Sin experiencia laboral agregada. ¡Añade tu primera experiencia!</p>
+    </ng-template>
+  </div>
 </div>

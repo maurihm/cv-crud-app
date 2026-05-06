@@ -1,18 +1,154 @@
 <div class="names-section">
-  <div *ngFor="let person of namesList" class="person-card">
-    <div class="person-header">
-      <img *ngIf="person.photoUrl" [src]="person.photoUrl" alt="{{ person.name }}" class="person-photo">
-      <div class="person-info">
-        <h1>{{ person.name }}</h1>
-        <p class="goal-life">{{ person.goalLife }}</p>
+  <!-- Formulario CRUD -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-overlay" (click)="closeForm()"></div>
+    <form [formGroup]="namesForm" (ngSubmit)="onSubmit()" class="form-modal">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar' : 'Agregar' }} Perfil</h3>
+        <button type="button" class="btn-close" (click)="closeForm()">✕</button>
       </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Tu nombre completo"
+            class="form-input"
+            [class.is-invalid]="submitted && f['name'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['name'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="goalLife">Objetivo Profesional</label>
+          <textarea
+            id="goalLife"
+            formControlName="goalLife"
+            placeholder="Cuéntanos tu objetivo profesional"
+            class="form-input"
+            rows="2"
+            [class.is-invalid]="submitted && f['goalLife'].errors"
+          ></textarea>
+          <small class="error" *ngIf="submitted && f['goalLife'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="tu@email.com"
+            class="form-input"
+            [class.is-invalid]="submitted && f['email'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['email'].errors">
+            Email válido requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Teléfono</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            placeholder="+34 123 456 789"
+            class="form-input"
+            [class.is-invalid]="submitted && f['phoneNumber'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['phoneNumber'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Ubicación</label>
+          <input
+            type="text"
+            id="location"
+            formControlName="location"
+            placeholder="Ciudad, País"
+            class="form-input"
+            [class.is-invalid]="submitted && f['location'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['location'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="socialNetwork">Red Social (URL)</label>
+          <input
+            type="url"
+            id="socialNetwork"
+            formControlName="socialNetwork"
+            placeholder="https://linkedin.com/in/..."
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="photoUrl">URL de Foto</label>
+          <input
+            type="url"
+            id="photoUrl"
+            formControlName="photoUrl"
+            placeholder="https://..."
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : editingId ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Perfil Display -->
+  <div *ngIf="!showForm">
+    <div class="edit-button-container">
+      <button class="btn-add" (click)="openForm()" *ngIf="namesList.length === 0">
+        <span class="icon">+</span> Agregar Perfil
+      </button>
     </div>
-    
-    <div class="contact-info">
-      <p *ngIf="person.email"><strong>Email:</strong> <a [href]="'mailto:' + person.email">{{ person.email }}</a></p>
-      <p *ngIf="person.phoneNumber"><strong>Teléfono:</strong> {{ person.phoneNumber }}</p>
-      <p *ngIf="person.location"><strong>Ubicación:</strong> {{ person.location }}</p>
-      <p *ngIf="person.socialNetwork"><strong>Red Social:</strong> <a [href]="person.socialNetwork" target="_blank">Perfil</a></p>
+
+    <div *ngFor="let person of namesList" class="person-card">
+      <div class="person-header">
+        <img *ngIf="person.photoUrl" [src]="person.photoUrl" alt="{{ person.name }}" class="person-photo">
+        <div class="person-info">
+          <h1>{{ person.name }}</h1>
+          <p class="goal-life">{{ person.goalLife }}</p>
+        </div>
+        <div class="person-actions">
+          <button class="btn-icon edit" (click)="openForm(person)" title="Editar">
+            ✎
+          </button>
+          <button class="btn-icon delete" (click)="deleteName(person.id!)" title="Eliminar">
+            ✕
+          </button>
+        </div>
+      </div>
+      
+      <div class="contact-info">
+        <p *ngIf="person.email"><strong>Email:</strong> <a [href]="'mailto:' + person.email">{{ person.email }}</a></p>
+        <p *ngIf="person.phoneNumber"><strong>Teléfono:</strong> {{ person.phoneNumber }}</p>
+        <p *ngIf="person.location"><strong>Ubicación:</strong> {{ person.location }}</p>
+        <p *ngIf="person.socialNetwork"><strong>Red Social:</strong> <a [href]="person.socialNetwork" target="_blank">Perfil</a></p>
+      </div>
     </div>
   </div>
 </div>

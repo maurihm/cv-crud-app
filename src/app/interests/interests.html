@@ -1,15 +1,66 @@
 <div class="interests-section">
-  <h2>Intereses</h2>
-  
-  <div *ngIf="interestsList.length > 0; else noData">
-    <ul class="interests-list">
-      <li *ngFor="let interest of interestsList" class="interest-tag">
-        {{ interest.interests }}
-      </li>
-    </ul>
+  <div class="section-header">
+    <h2>Intereses</h2>
+    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+      <span class="icon">+</span> Agregar
+    </button>
   </div>
-  
-  <ng-template #noData>
-    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
-  </ng-template>
+
+  <!-- Formulario CRUD -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-overlay" (click)="closeForm()"></div>
+    <form [formGroup]="interestsForm" (ngSubmit)="onSubmit()" class="form-modal">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar' : 'Agregar' }} Interés</h3>
+        <button type="button" class="btn-close" (click)="closeForm()">✕</button>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="interests">Interés</label>
+          <input
+            type="text"
+            id="interests"
+            formControlName="interests"
+            placeholder="Ej: Deportes, Tecnología, Viajes"
+            class="form-input"
+            [class.is-invalid]="submitted && f['interests'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['interests'].errors">
+            Campo requerido (mínimo 2 caracteres)
+          </small>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : editingId ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de Intereses -->
+  <div class="items-list" *ngIf="!showForm">
+    <div *ngIf="loading && interestsList.length === 0" class="loading">
+      Cargando...
+    </div>
+
+    <div *ngIf="interestsList.length > 0; else noData" class="interests-container">
+      <div *ngFor="let interest of interestsList" class="interest-tag">
+        <span>{{ interest.interests }}</span>
+        <div class="tag-actions">
+          <button class="btn-tag-edit" (click)="openForm(interest)" title="Editar">✎</button>
+          <button class="btn-tag-delete" (click)="deleteInterest(interest.id!)" title="Eliminar">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data">Sin intereses agregados. ¡Añade tu primer interés!</p>
+    </ng-template>
+  </div>
 </div>

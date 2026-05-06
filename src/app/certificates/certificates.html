@@ -1,16 +1,103 @@
 <div class="certificates-section">
-  <h2>Certificados</h2>
-  
-  <div *ngIf="certificatesList.length > 0; else noData">
-    <ul *ngFor="let cert of certificatesList" class="certificate-item">
-      <li>
-        <h3>{{ cert.name }}</h3>
-        <p><strong>{{ cert.organization }}</strong> - {{ cert.date }}</p>
-      </li>
-    </ul>
+  <div class="section-header">
+    <h2>Certificados</h2>
+    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+      <span class="icon">+</span> Agregar
+    </button>
   </div>
-  
-  <ng-template #noData>
-    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
-  </ng-template>
+
+  <!-- Formulario CRUD -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-overlay" (click)="closeForm()"></div>
+    <form [formGroup]="certificatesForm" (ngSubmit)="onSubmit()" class="form-modal">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar' : 'Agregar' }} Certificado</h3>
+        <button type="button" class="btn-close" (click)="closeForm()">✕</button>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="name">Nombre del Certificado</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Ej: Cloud Practitioner"
+            class="form-input"
+            [class.is-invalid]="submitted && f['name'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['name'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="organization">Organización</label>
+          <input
+            type="text"
+            id="organization"
+            formControlName="organization"
+            placeholder="Ej: AWS, Google, Microsoft"
+            class="form-input"
+            [class.is-invalid]="submitted && f['organization'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['organization'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Fecha de Obtención</label>
+          <input
+            type="date"
+            id="date"
+            formControlName="date"
+            class="form-input"
+            [class.is-invalid]="submitted && f['date'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['date'].errors">
+            Campo requerido
+          </small>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : editingId ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de Certificados -->
+  <div class="items-list" *ngIf="!showForm">
+    <div *ngIf="loading && certificatesList.length === 0" class="loading">
+      Cargando...
+    </div>
+
+    <div *ngIf="certificatesList.length > 0; else noData" class="items-container">
+      <div *ngFor="let cert of certificatesList" class="item-card">
+        <div class="item-content">
+          <h3>{{ cert.name }}</h3>
+          <p class="organization"><strong>{{ cert.organization }}</strong></p>
+          <p class="date">{{ cert.date }}</p>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon edit" (click)="openForm(cert)" title="Editar">
+            ✎
+          </button>
+          <button class="btn-icon delete" (click)="deleteCertificate(cert.id!)" title="Eliminar">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data">Sin certificados agregados. ¡Añade tu primer certificado!</p>
+    </ng-template>
+  </div>
 </div>

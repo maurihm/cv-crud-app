@@ -1,16 +1,93 @@
 <div class="languages-section">
-  <h2>Idiomas</h2>
-  
-  <div *ngIf="languagesList.length > 0; else noData">
-    <ul *ngFor="let lang of languagesList" class="language-item">
-      <li>
-        <h3>{{ lang.language }}</h3>
-        <p class="language-level"><strong>{{ lang.level }}</strong></p>
-      </li>
-    </ul>
+  <div class="section-header">
+    <h2>Idiomas</h2>
+    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+      <span class="icon">+</span> Agregar
+    </button>
   </div>
-  
-  <ng-template #noData>
-    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
-  </ng-template>
+
+  <!-- Formulario CRUD -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-overlay" (click)="closeForm()"></div>
+    <form [formGroup]="languagesForm" (ngSubmit)="onSubmit()" class="form-modal">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar' : 'Agregar' }} Idioma</h3>
+        <button type="button" class="btn-close" (click)="closeForm()">✕</button>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="language">Idioma</label>
+          <input
+            type="text"
+            id="language"
+            formControlName="language"
+            placeholder="Ej: Inglés, Español"
+            class="form-input"
+            [class.is-invalid]="submitted && f['language'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['language'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="level">Nivel</label>
+          <select
+            id="level"
+            formControlName="level"
+            class="form-input"
+            [class.is-invalid]="submitted && f['level'].errors"
+          >
+            <option value="">Selecciona un nivel</option>
+            <option value="Básico">Básico</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Avanzado">Avanzado</option>
+            <option value="Fluido">Fluido</option>
+            <option value="Nativo">Nativo</option>
+          </select>
+          <small class="error" *ngIf="submitted && f['level'].errors">
+            Campo requerido
+          </small>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : editingId ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de Idiomas -->
+  <div class="items-list" *ngIf="!showForm">
+    <div *ngIf="loading && languagesList.length === 0" class="loading">
+      Cargando...
+    </div>
+
+    <div *ngIf="languagesList.length > 0; else noData" class="items-container">
+      <div *ngFor="let lang of languagesList" class="item-card">
+        <div class="item-content">
+          <h3>{{ lang.language }}</h3>
+          <p class="level"><strong>{{ lang.level }}</strong></p>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon edit" (click)="openForm(lang)" title="Editar">
+            ✎
+          </button>
+          <button class="btn-icon delete" (click)="deleteLanguage(lang.id!)" title="Eliminar">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data">Sin idiomas agregados. ¡Añade tu primer idioma!</p>
+    </ng-template>
+  </div>
 </div>
