@@ -1,0 +1,10 @@
+.readonly .btn-add,
+.readonly .btn-icon,
+.readonly .btn-close,
+.readonly .form-container {
+  display: none !important;
+}
+
+.cv-container.readonly {
+  pointer-events: auto;
+}

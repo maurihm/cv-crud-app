@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   deploy-cv-subroute:
@@ -34,6 +34,7 @@ jobs:
           repository: maurihm/maurihm.github.io
           token: ${{ secrets.GH_PAGES_TOKEN }}
           path: target-pages
+          persist-credentials: false
 
       - name: Sync build into /cv
         run: |

@@ -16,11 +16,16 @@ import { WorkExperienceComponent } from './work-experience/work-experience';
 import { CertificatesComponent } from './certificates/certificates';
 import { LanguagesComponent } from './languages/languages';
 import { InterestsComponent } from './interests/interests';
+import { AppRoutingModule } from './app-routing-module';
+import { PublicCvComponent } from './public-cv/public-cv';
+import { DashboardComponent } from './dashboard/dashboard';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    PublicCvComponent,
+    DashboardComponent,
     NamesComponent,
     EducationComponent,
     SkillsComponent,
@@ -32,6 +37,7 @@ import { InterestsComponent } from './interests/interests';
   imports: [
     BrowserModule,
     CommonModule,
+    AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
