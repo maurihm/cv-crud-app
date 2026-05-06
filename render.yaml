@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: cv-musk-style
+    env: node
+    # free plan is default for new services
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/cv-musk-style/server/server.mjs
+    autoDeploy: true
+    # Health check (optional)
+    healthCheckPath: /
+    # Optional: set environment variables in Render UI after connecting
+    envVars:
+      # - key: EXAMPLE_VAR
+      #   value: "value"
+    

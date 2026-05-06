@@ -85,3 +85,28 @@ npm run build:gh-cv
 ```
 
 Este comando usa `--base-href /cv/` para que los assets funcionen correctamente en `https://maurihm.github.io/cv/`.
+
+## Desplegar en Render
+
+Recomiendo desplegar la versión SSR (server-side rendering) en Render. He añadido `render.yaml` con una configuración mínima.
+
+Pasos rápidos:
+
+1. Ve a https://dashboard.render.com and crea una cuenta (o inicia sesión).
+2. Haz click en "New +" → "Web Service" → Connect a repository (conecta tu GitHub).
+3. Selecciona el repositorio `maurihm/cv-crud-app` (este repo).
+4. Render detectará `render.yaml` y aplicará la configuración. Revisa y crea el servicio.
+5. En Settings del servicio añade las variables de entorno necesarias (por ejemplo: Firebase, DB, etc.).
+
+Comandos útiles para deploy manual:
+
+```bash
+# Construir localmente
+npm ci
+npm run build
+
+# Probar SSR localmente (usa Node 18+)
+node dist/cv-musk-style/server/server.mjs
+```
+
+Si prefieres, puedo crear también un pequeño script `deploy:render` que llame a la API de Render para forzar un deploy (necesitarás un `RENDER_API_KEY`). Dime si quieres que lo añada.
