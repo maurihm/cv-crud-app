@@ -1,16 +1,103 @@
 <div class="skills-section">
-  <h2>Skills</h2>
-  
-  <div *ngIf="skillsList.length > 0; else noData">
-    <ul *ngFor="let skill of skillsList">
-      <li>
-        <h3>{{ skill.name }}</h3>
-        <p><strong>{{ skill.category }}</strong> - {{ skill.level }}</p>
-      </li>
-    </ul>
+  <div class="section-header">
+    <h2>Habilidades</h2>
+    <button class="btn-add" (click)="openForm()" *ngIf="!showForm">
+      <span class="icon">+</span> Agregar
+    </button>
   </div>
-  
-  <ng-template #noData>
-    <p style="color: #999; font-style: italic;">Sin datos disponibles</p>
-  </ng-template>
+
+  <!-- Formulario CRUD -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-overlay" (click)="closeForm()"></div>
+    <form [formGroup]="skillsForm" (ngSubmit)="onSubmit()" class="form-modal">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar' : 'Agregar' }} Habilidad</h3>
+        <button type="button" class="btn-close" (click)="closeForm()">✕</button>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="name">Nombre de la Habilidad</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Ej: JavaScript, Python, etc."
+            class="form-input"
+            [class.is-invalid]="submitted && f['name'].errors"
+          />
+          <small class="error" *ngIf="submitted && f['name'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="level">Nivel</label>
+          <select
+            id="level"
+            formControlName="level"
+            class="form-input"
+            [class.is-invalid]="submitted && f['level'].errors"
+          >
+            <option value="">Selecciona un nivel</option>
+            <option *ngFor="let level of proficiencyLevels" [value]="level">
+              {{ level }}
+            </option>
+          </select>
+          <small class="error" *ngIf="submitted && f['level'].errors">
+            Campo requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Categoría (Opcional)</label>
+          <input
+            type="text"
+            id="category"
+            formControlName="category"
+            placeholder="Ej: Frontend, Backend, DevOps"
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : editingId ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de Habilidades -->
+  <div class="items-list" *ngIf="!showForm">
+    <div *ngIf="loading && skillsList.length === 0" class="loading">
+      Cargando...
+    </div>
+
+    <div *ngIf="skillsList.length > 0; else noData" class="skills-grid">
+      <div *ngFor="let item of skillsList" class="skill-card">
+        <div class="skill-badge" [ngClass]="'level-' + item.level.toLowerCase()">
+          {{ item.level }}
+        </div>
+        <h3>{{ item.name }}</h3>
+        <p class="category" *ngIf="item.category">{{ item.category }}</p>
+        <div class="skill-actions">
+          <button class="btn-icon edit" (click)="openForm(item)" title="Editar">
+            ✎
+          </button>
+          <button class="btn-icon delete" (click)="deleteSkill(item.id)" title="Eliminar">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data">Sin habilidades agregadas. ¡Añade tu primera habilidad!</p>
+    </ng-template>
+  </div>
 </div>

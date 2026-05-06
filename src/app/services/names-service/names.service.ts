@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Name } from '../../models/names/names.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NamesService {
-  private dbPath = '/header';
-  
-  namesRef: AngularFirestoreCollection<Name>;
+  private apiUrl = '/api/headers';
 
-  constructor(private db: AngularFirestore) {
-    this.namesRef = db.collection(this.dbPath);
+  constructor(private http: HttpClient) {}
+
+  getNames(): Observable<Name[]> {
+    return this.http.get<Name[]>(this.apiUrl);
   }
 
-  getNames(): AngularFirestoreCollection<Name> {
-    return this.namesRef;
+  getNameById(id: number): Observable<Name> {
+    return this.http.get<Name>(`${this.apiUrl}/${id}`);
+  }
+
+  createName(data: Name): Observable<Name> {
+    return this.http.post<Name>(this.apiUrl, data);
+  }
+
+  updateName(id: number, data: Name): Observable<Name> {
+    return this.http.put<Name>(`${this.apiUrl}/${id}`, data);
+  }
+
+  deleteName(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Interest } from '../../models/interests/interests.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterestsService {
-  private dbPath = '/interests';
-  
-  interestsRef: AngularFirestoreCollection<Interest>;
+  private apiUrl = '/api/interests';
 
-  constructor(private db: AngularFirestore) {
-    this.interestsRef = db.collection(this.dbPath);
+  constructor(private http: HttpClient) {}
+
+  getInterests(): Observable<Interest[]> {
+    return this.http.get<Interest[]>(this.apiUrl);
   }
 
-  getInterests(): AngularFirestoreCollection<Interest> {
-    return this.interestsRef;
+  getInterestById(id: number): Observable<Interest> {
+    return this.http.get<Interest>(`${this.apiUrl}/${id}`);
+  }
+
+  createInterest(data: Interest): Observable<Interest> {
+    return this.http.post<Interest>(this.apiUrl, data);
+  }
+
+  updateInterest(id: number, data: Interest): Observable<Interest> {
+    return this.http.put<Interest>(`${this.apiUrl}/${id}`, data);
+  }
+
+  deleteInterest(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

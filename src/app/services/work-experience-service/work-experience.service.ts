@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { WorkExperience } from '../../models/work-experience/work-experience.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkExperienceService {
-  private dbPath = '/work-experience';
-  
-  workExperienceRef: AngularFirestoreCollection<WorkExperience>;
+  private apiUrl = '/api/work-experience';
 
-  constructor(private db: AngularFirestore) {
-    this.workExperienceRef = db.collection(this.dbPath);
+  constructor(private http: HttpClient) {}
+
+  getWorkExperience(): Observable<WorkExperience[]> {
+    return this.http.get<WorkExperience[]>(this.apiUrl);
   }
 
-  getWorkExperience(): AngularFirestoreCollection<WorkExperience> {
-    return this.workExperienceRef;
+  getWorkExperienceById(id: number): Observable<WorkExperience> {
+    return this.http.get<WorkExperience>(`${this.apiUrl}/${id}`);
+  }
+
+  createWorkExperience(data: WorkExperience): Observable<WorkExperience> {
+    return this.http.post<WorkExperience>(this.apiUrl, data);
+  }
+
+  updateWorkExperience(id: number, data: WorkExperience): Observable<WorkExperience> {
+    return this.http.put<WorkExperience>(`${this.apiUrl}/${id}`, data);
+  }
+
+  deleteWorkExperience(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

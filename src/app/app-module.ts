@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
@@ -20,20 +22,21 @@ import { InterestsComponent } from './interests/interests';
     AppComponent,
     HeaderComponent,
     NamesComponent,
-    EducationComponent, // <-- 1. AQUÍ VA EDUCACIÓN
-    SkillsComponent, // <-- 2. AQUÍ VA SKILLS
-    WorkExperienceComponent, // <-- 3. AQUÍ VA WORK EXPERIENCE
-    CertificatesComponent, // <-- 4. AQUÍ VA CERTIFICADOS
-    LanguagesComponent, // <-- 5. AQUÍ VA IDIOMAS
-    InterestsComponent, // <-- 6. AQUÍ VA INTERESES
+    EducationComponent,
+    SkillsComponent,
+    WorkExperienceComponent,
+    CertificatesComponent,
+    LanguagesComponent,
+    InterestsComponent,
   ],
   imports: [
     BrowserModule,
     CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    // Aquí van tus imports de Firebase (AngularFireModule.initializeApp...)
-    // ¡Asegúrate de que EducationComponent NO esté en esta lista!
   ],
   providers: [],
   bootstrap: [AppComponent]
