@@ -98,7 +98,7 @@ export class SkillsComponent implements OnInit {
           this.closeForm();
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error creating skill:', err);
           this.loading = false;
         }
@@ -114,7 +114,7 @@ export class SkillsComponent implements OnInit {
           this.loadSkills();
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error deleting skill:', err);
           this.loading = false;
         }
