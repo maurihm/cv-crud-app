@@ -5,42 +5,12 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
-import cors from 'cors';
 import { join } from 'node:path';
-import sequelize from './server/config/database';
-import apiRoutes from './server/routes/apiRoutes';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Initialize Database
-async function initializeDatabase() {
-  try {
-    await sequelize.authenticate();
-    console.log('Database connection established successfully.');
-    
-    // Sync models with database
-    await sequelize.sync({ alter: false });
-    console.log('Database models synchronized.');
-  } catch (error) {
-    console.error('Database initialization error:', error);
-  }
-}
-
-initializeDatabase();
-
-// API Routes
-app.use(apiRoutes);
 
 /**
  * Serve static files from /browser
