@@ -12,7 +12,7 @@ export const getAllLanguages = async (req: Request, res: Response) => {
 
 export const getLanguageById = async (req: Request, res: Response) => {
   try {
-    const language = await Language.findByPk(req.params.id);
+    const language = await Language.findByPk(req.params.id as string);
     if (!language) {
       return res.status(404).json({ error: 'Language not found' });
     }
@@ -33,7 +33,7 @@ export const createLanguage = async (req: Request, res: Response) => {
 
 export const updateLanguage = async (req: Request, res: Response) => {
   try {
-    const language = await Language.findByPk(req.params.id);
+    const language = await Language.findByPk(req.params.id as string);
     if (!language) {
       return res.status(404).json({ error: 'Language not found' });
     }
@@ -46,7 +46,7 @@ export const updateLanguage = async (req: Request, res: Response) => {
 
 export const deleteLanguage = async (req: Request, res: Response) => {
   try {
-    const language = await Language.findByPk(req.params.id);
+    const language = await Language.findByPk(req.params.id as string);
     if (!language) {
       return res.status(404).json({ error: 'Language not found' });
     }

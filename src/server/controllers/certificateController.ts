@@ -12,7 +12,7 @@ export const getAllCertificates = async (req: Request, res: Response) => {
 
 export const getCertificateById = async (req: Request, res: Response) => {
   try {
-    const certificate = await Certificate.findByPk(req.params.id);
+    const certificate = await Certificate.findByPk(req.params.id as string);
     if (!certificate) {
       return res.status(404).json({ error: 'Certificate not found' });
     }
@@ -33,7 +33,7 @@ export const createCertificate = async (req: Request, res: Response) => {
 
 export const updateCertificate = async (req: Request, res: Response) => {
   try {
-    const certificate = await Certificate.findByPk(req.params.id);
+    const certificate = await Certificate.findByPk(req.params.id as string);
     if (!certificate) {
       return res.status(404).json({ error: 'Certificate not found' });
     }
@@ -46,7 +46,7 @@ export const updateCertificate = async (req: Request, res: Response) => {
 
 export const deleteCertificate = async (req: Request, res: Response) => {
   try {
-    const certificate = await Certificate.findByPk(req.params.id);
+    const certificate = await Certificate.findByPk(req.params.id as string);
     if (!certificate) {
       return res.status(404).json({ error: 'Certificate not found' });
     }

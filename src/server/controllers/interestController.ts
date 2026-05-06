@@ -12,7 +12,7 @@ export const getAllInterests = async (req: Request, res: Response) => {
 
 export const getInterestById = async (req: Request, res: Response) => {
   try {
-    const interest = await Interest.findByPk(req.params.id);
+    const interest = await Interest.findByPk(req.params.id as string);
     if (!interest) {
       return res.status(404).json({ error: 'Interest not found' });
     }
@@ -33,7 +33,7 @@ export const createInterest = async (req: Request, res: Response) => {
 
 export const updateInterest = async (req: Request, res: Response) => {
   try {
-    const interest = await Interest.findByPk(req.params.id);
+    const interest = await Interest.findByPk(req.params.id as string);
     if (!interest) {
       return res.status(404).json({ error: 'Interest not found' });
     }
@@ -46,7 +46,7 @@ export const updateInterest = async (req: Request, res: Response) => {
 
 export const deleteInterest = async (req: Request, res: Response) => {
   try {
-    const interest = await Interest.findByPk(req.params.id);
+    const interest = await Interest.findByPk(req.params.id as string);
     if (!interest) {
       return res.status(404).json({ error: 'Interest not found' });
     }

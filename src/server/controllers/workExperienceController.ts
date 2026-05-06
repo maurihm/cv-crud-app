@@ -12,7 +12,7 @@ export const getAllWorkExperience = async (req: Request, res: Response) => {
 
 export const getWorkExperienceById = async (req: Request, res: Response) => {
   try {
-    const workExperience = await WorkExperience.findByPk(req.params.id);
+    const workExperience = await WorkExperience.findByPk(req.params.id as string);
     if (!workExperience) {
       return res.status(404).json({ error: 'Work experience not found' });
     }
@@ -33,7 +33,7 @@ export const createWorkExperience = async (req: Request, res: Response) => {
 
 export const updateWorkExperience = async (req: Request, res: Response) => {
   try {
-    const workExperience = await WorkExperience.findByPk(req.params.id);
+    const workExperience = await WorkExperience.findByPk(req.params.id as string);
     if (!workExperience) {
       return res.status(404).json({ error: 'Work experience not found' });
     }
@@ -46,7 +46,7 @@ export const updateWorkExperience = async (req: Request, res: Response) => {
 
 export const deleteWorkExperience = async (req: Request, res: Response) => {
   try {
-    const workExperience = await WorkExperience.findByPk(req.params.id);
+    const workExperience = await WorkExperience.findByPk(req.params.id as string);
     if (!workExperience) {
       return res.status(404).json({ error: 'Work experience not found' });
     }

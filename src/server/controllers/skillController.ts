@@ -12,7 +12,7 @@ export const getAllSkills = async (req: Request, res: Response) => {
 
 export const getSkillById = async (req: Request, res: Response) => {
   try {
-    const skill = await Skill.findByPk(req.params.id);
+    const skill = await Skill.findByPk(req.params.id as string);
     if (!skill) {
       return res.status(404).json({ error: 'Skill not found' });
     }
@@ -33,7 +33,7 @@ export const createSkill = async (req: Request, res: Response) => {
 
 export const updateSkill = async (req: Request, res: Response) => {
   try {
-    const skill = await Skill.findByPk(req.params.id);
+    const skill = await Skill.findByPk(req.params.id as string);
     if (!skill) {
       return res.status(404).json({ error: 'Skill not found' });
     }
@@ -46,7 +46,7 @@ export const updateSkill = async (req: Request, res: Response) => {
 
 export const deleteSkill = async (req: Request, res: Response) => {
   try {
-    const skill = await Skill.findByPk(req.params.id);
+    const skill = await Skill.findByPk(req.params.id as string);
     if (!skill) {
       return res.status(404).json({ error: 'Skill not found' });
     }

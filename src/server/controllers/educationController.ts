@@ -12,7 +12,7 @@ export const getAllEducation = async (req: Request, res: Response) => {
 
 export const getEducationById = async (req: Request, res: Response) => {
   try {
-    const education = await Education.findByPk(req.params.id);
+    const education = await Education.findByPk(req.params.id as string);
     if (!education) {
       return res.status(404).json({ error: 'Education not found' });
     }
@@ -33,7 +33,7 @@ export const createEducation = async (req: Request, res: Response) => {
 
 export const updateEducation = async (req: Request, res: Response) => {
   try {
-    const education = await Education.findByPk(req.params.id);
+    const education = await Education.findByPk(req.params.id as string);
     if (!education) {
       return res.status(404).json({ error: 'Education not found' });
     }
@@ -46,7 +46,7 @@ export const updateEducation = async (req: Request, res: Response) => {
 
 export const deleteEducation = async (req: Request, res: Response) => {
   try {
-    const education = await Education.findByPk(req.params.id);
+    const education = await Education.findByPk(req.params.id as string);
     if (!education) {
       return res.status(404).json({ error: 'Education not found' });
     }

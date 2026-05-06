@@ -12,7 +12,7 @@ export const getAllHeaders = async (req: Request, res: Response) => {
 
 export const getHeaderById = async (req: Request, res: Response) => {
   try {
-    const header = await Header.findByPk(req.params.id);
+    const header = await Header.findByPk(req.params.id as string);
     if (!header) {
       return res.status(404).json({ error: 'Header not found' });
     }
@@ -33,7 +33,7 @@ export const createHeader = async (req: Request, res: Response) => {
 
 export const updateHeader = async (req: Request, res: Response) => {
   try {
-    const header = await Header.findByPk(req.params.id);
+    const header = await Header.findByPk(req.params.id as string);
     if (!header) {
       return res.status(404).json({ error: 'Header not found' });
     }
@@ -46,7 +46,7 @@ export const updateHeader = async (req: Request, res: Response) => {
 
 export const deleteHeader = async (req: Request, res: Response) => {
   try {
-    const header = await Header.findByPk(req.params.id);
+    const header = await Header.findByPk(req.params.id as string);
     if (!header) {
       return res.status(404).json({ error: 'Header not found' });
     }
