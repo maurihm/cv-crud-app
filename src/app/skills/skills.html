@@ -80,7 +80,7 @@
 
     <div *ngIf="skillsList.length > 0; else noData" class="skills-grid">
       <div *ngFor="let item of skillsList" class="skill-card">
-        <div class="skill-badge" [ngClass]="'level-' + item.level.toLowerCase()">
+        <div class="skill-badge" [ngClass]="'level-' + (item.level || '').toLowerCase()">
           {{ item.level }}
         </div>
         <h3>{{ item.name }}</h3>
@@ -89,7 +89,7 @@
           <button class="btn-icon edit" (click)="openForm(item)" title="Editar">
             ✎
           </button>
-          <button class="btn-icon delete" (click)="deleteSkill(item.id)" title="Eliminar">
+          <button class="btn-icon delete" (click)="deleteSkill(item.id!)" title="Eliminar">
             ✕
           </button>
         </div>

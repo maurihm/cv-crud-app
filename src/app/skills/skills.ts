@@ -13,7 +13,7 @@ export class SkillsComponent implements OnInit {
   skillsList: Skill[] = [];
   skillsForm!: FormGroup;
   showForm = false;
-  editingId: number | null = null;
+  editingId: string | null = null;
   loading = false;
   submitted = false;
 
@@ -41,12 +41,12 @@ export class SkillsComponent implements OnInit {
   loadSkills(): void {
     this.loading = true;
     this.skillsService.getSkills().subscribe({
-      next: (data) => {
+      next: (data: Skill[]) => {
         this.skillsList = data;
         this.loading = false;
         this.cdr.detectChanges();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error loading skills:', err);
         this.loading = false;
       }
@@ -56,7 +56,7 @@ export class SkillsComponent implements OnInit {
   openForm(item?: Skill): void {
     this.submitted = false;
     if (item) {
-      this.editingId = item.id;
+      this.editingId = item.id ?? null;
       this.skillsForm.patchValue(item);
     } else {
       this.editingId = null;
@@ -86,7 +86,7 @@ export class SkillsComponent implements OnInit {
           this.closeForm();
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error updating skill:', err);
           this.loading = false;
         }
@@ -106,7 +106,7 @@ export class SkillsComponent implements OnInit {
     }
   }
 
-  deleteSkill(id: number): void {
+  deleteSkill(id: string): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta habilidad?')) {
       this.loading = true;
       this.skillsService.deleteSkill(id).subscribe({

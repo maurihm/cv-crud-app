@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CertificatesService } from '../services/certificates-service/certificates.service';
 import { Certificate } from '../models/certificates/certificates.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-certificates',
@@ -15,24 +14,16 @@ export class CertificatesComponent implements OnInit {
   constructor(private certificatesService: CertificatesService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    console.log('CertificatesComponent initialized');
-    this.retrieveCertificates();
+    this.loadCertificates();
   }
 
-  retrieveCertificates(): void {
-    this.certificatesService.getCertificates().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe({
-      next: (data) => {
-        console.log('CertificatesComponent data received:', data);
+  loadCertificates(): void {
+    this.certificatesService.getCertificates().subscribe({
+      next: (data: Certificate[]) => {
         this.certificatesList = data;
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('CertificatesComponent error retrieving data:', err)
+      error: (err: any) => console.error('CertificatesComponent error retrieving data:', err)
     });
   }
 }

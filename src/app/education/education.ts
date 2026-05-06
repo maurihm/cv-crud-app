@@ -13,7 +13,7 @@ export class EducationComponent implements OnInit {
   educationList: Education[] = [];
   educationForm!: FormGroup;
   showForm = false;
-  editingId: number | null = null;
+  editingId: string | null = null;
   loading = false;
   submitted = false;
 
@@ -42,12 +42,12 @@ export class EducationComponent implements OnInit {
   loadEducation(): void {
     this.loading = true;
     this.educationService.getEducation().subscribe({
-      next: (data) => {
+      next: (data: Education[]) => {
         this.educationList = data;
         this.loading = false;
         this.cdr.detectChanges();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error loading education:', err);
         this.loading = false;
       }
@@ -57,7 +57,7 @@ export class EducationComponent implements OnInit {
   openForm(item?: Education): void {
     this.submitted = false;
     if (item) {
-      this.editingId = item.id;
+      this.editingId = item.id ?? null;
       this.educationForm.patchValue(item);
     } else {
       this.editingId = null;
@@ -87,7 +87,7 @@ export class EducationComponent implements OnInit {
           this.closeForm();
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error updating education:', err);
           this.loading = false;
         }
@@ -99,7 +99,7 @@ export class EducationComponent implements OnInit {
           this.closeForm();
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error creating education:', err);
           this.loading = false;
         }
@@ -107,7 +107,7 @@ export class EducationComponent implements OnInit {
     }
   }
 
-  deleteEducation(id: number): void {
+  deleteEducation(id: string): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta entrada?')) {
       this.loading = true;
       this.educationService.deleteEducation(id).subscribe({
@@ -115,7 +115,7 @@ export class EducationComponent implements OnInit {
           this.loadEducation();
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error deleting education:', err);
           this.loading = false;
         }

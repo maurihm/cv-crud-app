@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable, from } from 'rxjs';
 import { Language } from '../../models/languages/languages.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguagesService {
-  private apiUrl = '/api/languages';
+  private dbPath = '/languages';
 
-  constructor(private http: HttpClient) {}
+  languagesRef: AngularFirestoreCollection<Language>;
+
+  constructor(private db: AngularFirestore) {
+    this.languagesRef = db.collection(this.dbPath);
+  }
 
   getLanguages(): Observable<Language[]> {
-    return this.http.get<Language[]>(this.apiUrl);
+    return this.languagesRef.valueChanges({ idField: 'id' }) as Observable<Language[]>;
   }
 
-  getLanguageById(id: number): Observable<Language> {
-    return this.http.get<Language>(`${this.apiUrl}/${id}`);
+  getLanguageById(id: string): Observable<Language | undefined> {
+    return this.languagesRef.doc(id).valueChanges({ idField: 'id' }) as Observable<Language | undefined>;
   }
 
-  createLanguage(data: Language): Observable<Language> {
-    return this.http.post<Language>(this.apiUrl, data);
+  createLanguage(data: Language): Observable<any> {
+    const { id, ...payload } = data;
+    return from(this.languagesRef.add(payload));
   }
 
-  updateLanguage(id: number, data: Language): Observable<Language> {
-    return this.http.put<Language>(`${this.apiUrl}/${id}`, data);
+  updateLanguage(id: string, data: Partial<Language>): Observable<void> {
+    const { id: ignoredId, ...payload } = data as Language;
+    return from(this.languagesRef.doc(id).update(payload));
   }
 
-  deleteLanguage(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteLanguage(id: string): Observable<void> {
+    return from(this.languagesRef.doc(id).delete());
   }
 }

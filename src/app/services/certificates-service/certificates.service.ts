@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable, from } from 'rxjs';
 import { Certificate } from '../../models/certificates/certificates.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CertificatesService {
-  private apiUrl = '/api/certificates';
+  private dbPath = '/certificates';
 
-  constructor(private http: HttpClient) {}
+  certificatesRef: AngularFirestoreCollection<Certificate>;
+
+  constructor(private db: AngularFirestore) {
+    this.certificatesRef = db.collection(this.dbPath);
+  }
 
   getCertificates(): Observable<Certificate[]> {
-    return this.http.get<Certificate[]>(this.apiUrl);
+    return this.certificatesRef.valueChanges({ idField: 'id' }) as Observable<Certificate[]>;
   }
 
-  getCertificateById(id: number): Observable<Certificate> {
-    return this.http.get<Certificate>(`${this.apiUrl}/${id}`);
+  getCertificateById(id: string): Observable<Certificate | undefined> {
+    return this.certificatesRef.doc(id).valueChanges({ idField: 'id' }) as Observable<Certificate | undefined>;
   }
 
-  createCertificate(data: Certificate): Observable<Certificate> {
-    return this.http.post<Certificate>(this.apiUrl, data);
+  createCertificate(data: Certificate): Observable<any> {
+    const { id, ...payload } = data;
+    return from(this.certificatesRef.add(payload));
   }
 
-  updateCertificate(id: number, data: Certificate): Observable<Certificate> {
-    return this.http.put<Certificate>(`${this.apiUrl}/${id}`, data);
+  updateCertificate(id: string, data: Partial<Certificate>): Observable<void> {
+    const { id: ignoredId, ...payload } = data as Certificate;
+    return from(this.certificatesRef.doc(id).update(payload));
   }
 
-  deleteCertificate(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteCertificate(id: string): Observable<void> {
+    return from(this.certificatesRef.doc(id).delete());
   }
 }

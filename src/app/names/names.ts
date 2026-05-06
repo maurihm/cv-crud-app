@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NamesService } from '../services/names-service/names.service';
 import { Name } from '../models/names/names.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-names',
@@ -15,24 +14,16 @@ export class NamesComponent implements OnInit {
   constructor(private namesService: NamesService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    console.log('NamesComponent initialized');
-    this.retrieveNames();
+    this.loadNames();
   }
 
-  retrieveNames(): void {
-    this.namesService.getNames().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe({
-      next: (data) => {
-        console.log('NamesComponent data received:', data);
+  loadNames(): void {
+    this.namesService.getNames().subscribe({
+      next: (data: Name[]) => {
         this.namesList = data;
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('NamesComponent error retrieving data:', err)
+      error: (err: any) => console.error('NamesComponent error retrieving data:', err)
     });
   }
 }

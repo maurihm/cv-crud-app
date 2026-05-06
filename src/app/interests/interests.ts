@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { InterestsService } from '../services/interests-service/interests.service';
 import { Interest } from '../models/interests/interests.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-interests',
@@ -15,24 +14,16 @@ export class InterestsComponent implements OnInit {
   constructor(private interestsService: InterestsService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    console.log('InterestsComponent initialized');
-    this.retrieveInterests();
+    this.loadInterests();
   }
 
-  retrieveInterests(): void {
-    this.interestsService.getInterests().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe({
-      next: (data) => {
-        console.log('InterestsComponent data received:', data);
+  loadInterests(): void {
+    this.interestsService.getInterests().subscribe({
+      next: (data: Interest[]) => {
         this.interestsList = data;
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('InterestsComponent error retrieving data:', err)
+      error: (err: any) => console.error('InterestsComponent error retrieving data:', err)
     });
   }
 }
